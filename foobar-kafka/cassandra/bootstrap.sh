@@ -15,7 +15,7 @@ if [ "$1" = 'dse' -a "$2" = 'cassandra' ]; then
     # Invoke the entrypoint script to start Cassandra as a background job and get the pid
     # starting Cassandra in the background the first time allows us to monitor progress and register schema
     echo '=> Starting Cassandra'
-    /docker-entrypoint.sh &
+    docker-entrypoint.sh &
     dse_pid="$!"
 
     # Wait for port 9042 (CQL) to be ready for up to 240 seconds
@@ -53,4 +53,4 @@ if [ "$1" = 'dse' -a "$2" = 'cassandra' ]; then
 fi
 
 # Run the main entrypoint script from the base image
-exec /docker-entrypoint.sh
+exec docker-entrypoint.sh

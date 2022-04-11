@@ -12,7 +12,7 @@ services:
       WEATHER_TABLE: ${WEATHER_TABLE}
       TWITTER_TABLE: ${TWITTER_TABLE}
     ports:
-        - 8888:8888
+      - 8889:8888
     volumes:
       - $PWD/data-vis/python:/usr/app
 networks:
