@@ -1,0 +1,19 @@
+FROM python:3.8
+
+ENV HTTPS_PROXY=http://cias.geoaws.com:8080
+ENV https_proxy=http://cias.geoaws.com:8080
+
+WORKDIR /usr/app
+ADD ./requirements.txt ./
+RUN python -m pip install --upgrade pip && \
+    pip install -r requirements.txt && \
+    useradd -ms /bin/bash -g users sfu && \
+    chown -R sfu:users /usr/app
+USER sfu
+
+COPY --chown=sfu:users python .
+# COPY --chown=sfu:users twitter.csv .
+
+RUN jupyter trust blog-visuals.ipynb
+ENTRYPOINT ["jupyter", "notebook", "--paths='/usr/app'","--port=8888", "--no-browser", "--ip=0.0.0.0", "--NotebookApp.token=''", "--NotebookApp.password=''","--allow-root"]
+CMD ["blog-visuals.ipynb"]

@@ -1,10 +1,34 @@
-# How to Build a Distributed Big Data Pipeline Using Kafka and Docker
+## Runbook (Day 1)
 
+## SSH into your Continental.datalake appliance
+SSH is a protocol, that allows you to login to your appliance with a terminal. Your login name is your windows account. 
+We recommend to use your terminal and your preinstalled ssh client for the purposes of this session. 
+The IP address of your appliance can be obtained via the Continental.datalake website.
 
-# Quickstart instructions
-Please run all these commands inside foobar-kafka directory
+Open your terminal and run:  
+``ssh "uiXXXXX@DATLAKE-APPLIANCE-IP"``
 
-#Create docker networks
+The datalake appliances allow exposing web-applications on a preconfigured port, which can be accessed using the following domain based on the appliance's ip address:  
+``https://ip-DATALAKE-APPLIANCE-IP.datalake.u0.ww.conti.de/x-datalake/``
+
+DATALAKE-APPLIANCE-IP format: 10-194-160-112
+
+As part of our session today, we will run a jupyter notebook application on the appliance and expose it on port 8889.
+Therefore, the default port `9999` of the datalake appliances, which is used to expose web applications needs to be changed.
+
+To do that, run the following commands in sequence:
+```
+sudo su - (switches to the root user)
+vi /etc/nginx/x-datalake.conf (type :wq to write the editor's buffer to disk and quit to exit the editor)
+update the port from 9999 to 8889
+exit (switches back to your user)
+```
+
+## Get the code
+Download the content of this Git repository onto your datalake appliance by running:  
+``git clone https://github.geo.conti.de/uib05465/zilina.git data-streaming-pipeline``
+
+## Create docker networks
 ```bash
 $ docker network create kafka-network                         # create a new docker network for kafka cluster (zookeeper, broker, kafka-manager services, and kafka connect sink services)
 $ docker network create cassandra-network                     # create a new docker network for cassandra. (kafka connect will exist on this network as well in addition to kafka-network)
