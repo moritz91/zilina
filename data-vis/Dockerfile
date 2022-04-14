@@ -15,5 +15,5 @@ COPY --chown=sfu:users python .
 # COPY --chown=sfu:users twitter.csv .
 
 RUN jupyter trust blog-visuals.ipynb
-ENTRYPOINT ["jupyter", "notebook", "--paths='/usr/app'","--port=8888", "--no-browser", "--ip=0.0.0.0", "--NotebookApp.token=''", "--NotebookApp.password=''","--allow-root"]
+ENTRYPOINT ["jupyter", "notebook", "--paths='/usr/app'","--port=8888", "--no-browser", "--ip=0.0.0.0", "--NotebookApp.token=''", "--NotebookApp.password=''", "--NotebookApp.base_url='/x-datalake/'", "--allow-root"]
 CMD ["blog-visuals.ipynb"]

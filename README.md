@@ -13,7 +13,7 @@ The datalake appliances allow exposing web-applications on a preconfigured port,
 
 DATALAKE-APPLIANCE-IP format: 10-194-160-112
 
-As part of our session today, we will run a jupyter notebook application on the appliance and expose it on port 8889.
+As part of our session today, we will run a jupyter notebook application on the appliance and expose it on port `8889`.
 Therefore, the default port `9999` of the datalake appliances, which is used to expose web applications needs to be changed.
 
 To do that, run the following commands in sequence:
@@ -21,6 +21,7 @@ To do that, run the following commands in sequence:
 sudo su - (switches to the root user)
 vi /etc/nginx/x-datalake.conf (type :wq to write the editor's buffer to disk and quit to exit the editor)
 update the port from 9999 to 8889
+comment out the rewrite statement (append # to the line)
 exit (switches back to your user)
 ```
 
@@ -58,7 +59,7 @@ $ docker-compose -f twitter-producer/docker-compose.yml up -d # start the produc
 ```
 ## Starting Twitter classifier (plus Weather consumer for CSV dumps)
 
-(Alternatively you can build first, docker will do it anyway if it hasnt built it before, this step is required to apply new changes)
+(Alternatively you can build first, docker will do it anyway if it hasn't built it before, this step is required to apply new changes)
 ```bash
 $ docker-compose -f consumers/docker-compose.yml build
 ```
