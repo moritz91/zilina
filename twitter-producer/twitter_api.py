@@ -5,8 +5,9 @@ import tweepy
 from kafka import KafkaProducer
 import configparser
 
-TWIITER_API_GEOBOX_FILTER = [-123.371556, 49.009125, -122.264683, 49.375294]
-TWITTER_API_LANGS_FILTER = ['en']
+# TWIITER_API_GEOBOX_FILTER = [-123.371556, 49.009125, -122.264683, 49.375294]
+TWITTER_API_GEOBOX_FILTER = [6.7743601001, 47.9229288956, 14.0861382436, 53.9939579505]
+TWITTER_API_LANGS_FILTER = ['en', 'de']
 
 # Twitter API Keys
 config = configparser.ConfigParser()
@@ -69,7 +70,7 @@ class twitter_stream():
 
     def twitter_listener(self):
         stream = tweepy.Stream(auth=self.auth, listener=self.stream_listener)
-        stream.filter(locations=TWIITER_API_GEOBOX_FILTER,
+        stream.filter(locations=TWITTER_API_GEOBOX_FILTER,
                       languages=TWITTER_API_LANGS_FILTER)
 
 

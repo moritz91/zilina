@@ -1,2 +1,2 @@
 kafka-python
-tweepy
+tweepy==3.10.0

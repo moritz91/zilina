@@ -11,5 +11,4 @@ services:
 
 networks:
   default:
-    external:
-      name: kafka-network
+    name: kafka-network
