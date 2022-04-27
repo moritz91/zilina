@@ -1,3 +1,4 @@
 cassandra/data
 .env
 venv
+.idea
