@@ -104,6 +104,7 @@ INSERT INTO cc_transactions (userid, year, month, day, id, card, amount, status)
 INSERT INTO cc_transactions (userid, year, month, day, id, card, amount, status) VALUES ('John', 2022, 2, 6, 2, '1111-1111-1111-1111', 20, 'PENDING');
 INSERT INTO cc_transactions (userid, year, month, day, id, card, amount, status) VALUES ('Bob', 2022, 2, 6, 3, '2222-2222-2222-2222', -17, 'COMPLETED');
 INSERT INTO cc_transactions (userid, year, month, day, id, card, amount, status) VALUES ('Bob', 2022, 2, 7, 4, '2222-2222-2222-2222', -32, 'COMPLETED');
+INSERT INTO cc_transactions (userid, year, month, day, id, card, amount, status) VALUES ('Bob', 2022, 2, 7, 5, '2222-2222-2222-2222', 1200, 'COMPLETED');
 
 SELECT * FROM cc_transactions WHERE userid = 'John' and year = 2022;
 SELECT * FROM transactions_by_day WHERE year = 2022 and month = 2 and day = 6;
