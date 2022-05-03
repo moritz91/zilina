@@ -11,6 +11,8 @@ if __name__ == "__main__":
 
     SINK_TOPIC = os.environ.get("SINK_TOPIC_NAME", "twittersink")
 
+    nltk.download('omw-1.4', download_dir='/usr/app/nltk_data')
+
     path = os.path.dirname(os.path.realpath(__file__))
     parent = os.path.dirname(path)
     cwd = parent + "/nltk_data"
@@ -20,6 +22,7 @@ if __name__ == "__main__":
 
     TOPIC_NAME = os.environ.get("TOPIC_NAME")
     KAFKA_BROKER_URL = os.environ.get("KAFKA_BROKER_URL") if os.environ.get("KAFKA_BROKER_URL") else 'localhost:9092'
+
     print("Reading model file")
     with open(path + '/trainedpipe.pkl', 'rb') as f:
         classifier = pickle.load(f)
@@ -48,7 +51,7 @@ if __name__ == "__main__":
         classification = "Positive" if res == 1 else "Negative"
         dic = {"tweet" : target, "datetime" : timestamp.strftime('%Y-%m-%d %H:%M:%S'), "location" : location, "classification" : classification}
         df = pd.DataFrame([dic])
-        # saveTwitterDf(df,CASSANDRA_HOST, CASSANDRA_KEYSPACE)
+        # saveTwitterDf(df)
         print("Saved to CSV")
         df.to_csv(csvbackupfile, mode='a', header=False, index=False)
         print("Sending it to Cassandra Sink")
@@ -57,3 +60,4 @@ if __name__ == "__main__":
         print("Sent")
 
     print("Bye-Bye")
+

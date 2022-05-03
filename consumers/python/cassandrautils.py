@@ -19,9 +19,9 @@ TWITTER_TABLE = os.environ.get("TWITTER_TABLE") if os.environ.get("TWITTER_TABLE
 
 def saveTwitterDf(dfrecords):
     if isinstance(CASSANDRA_HOST, list):
-        cluster = Cluster(CASSANDRA_HOST)
+        cluster = Cluster(CASSANDRA_HOST, protocol_version=5)
     else:
-        cluster = Cluster([CASSANDRA_HOST])
+        cluster = Cluster([CASSANDRA_HOST], protocol_version=5)
 
     session = cluster.connect(CASSANDRA_KEYSPACE)
 
