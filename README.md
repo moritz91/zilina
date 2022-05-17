@@ -7,11 +7,6 @@ git remote set-branches --add origin day-2
 git fetch origin day-2
 git checkout day-2
 ````
-Authentication
-```
-Username: moritz91
-Password: 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
-```
 
 ## Starting Cassandra
 Cassandra is setup so it runs keyspace and schema creation scripts at first setup so it is ready to use.
@@ -47,9 +42,18 @@ $ docker-compose -f consumers/docker-compose.yml build        # this step is alw
 $ docker-compose -f consumers/docker-compose.yml up -d        # start the consumers
 ```
 
+```bash
+$ docker-compose -f data-vis/docker-compose.yml up -d         # start the web app for data visualization 
+```
+
 ## Check all containers are running with
 ```bash
 $ docker ps -a                                                # sanity check to make sure services are up: kafka_broker_1, kafka-manager, zookeeper, kafka-connect service
+```
+
+## Access the Jupyter Notebook at
+```bash
+http://{machine-ip}.eu-central-1.compute.amazonaws.com:8889
 ```
 
 ## Teardown
@@ -60,7 +64,8 @@ $ docker-compose -f consumers/docker-compose.yml down         # stop the consume
 $ docker-compose -f owm-producer/docker-compose.yml down      # stop open weather map producer
 $ docker-compose -f twitter-producer/docker-compose.yml down  # stop twitter producer
 $ docker-compose -f kafka/docker-compose.yml down             # stop zookeeper, broker, kafka-manager and kafka-connect services
-$ docker-compose -f cassandra/docker-compose.yml down         # stop Cassandra
+$ docker-compose -f cassandra/docker-compose.yml down         # stop cassandra
+$ docker-compose -f data-vis/docker-compose.yml down          # stop jupyter notebook
 ```
 
 To remove the kafka-network network:
